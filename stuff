@@ -1,0 +1,84 @@
+Q1
+import re
+
+text = open("file.txt", "r").read()
+EMAIL_REG = r"([\w\.\d]+\@[\w\d]+\.[\w\d]+)"
+
+result = re.sub(EMAIL_REG, "******",text)
+redactedFile = open("removed.txt","w")
+redactedFile.write(result)
+redactedFile.close()
+print(result)
+
+_______________________________________________________
+Q2 
+def uniqueWords(filename):
+    try:
+        i = open(filename)
+        s = set()
+        for line in i:
+            for word in line.lower().split():
+                s.add(word)
+        i.close()
+        return list(s)
+
+def main():
+    print("uniqueWords(filename) test cases")
+    print(uniqueWords("filename.txt"))
+
+
+if __name__ == '__main__':
+    main()
+_________________________________________________-
+Q3 
+
+import random
+def roll():
+    die = ["Red", "Green", "Yellow", "Basket", "Raven"]
+    return random.choice(die)
+
+simulation = 100000
+wins = 0
+
+for i in range (simulation):
+    Red = 0
+    Green = 0
+    yellow = 0
+    Basket = 0
+
+def farm (fruitbasket):
+    fruits = 4*[4]
+    ravens = 0
+    while sum(fruits) > 0 and ravens <5:
+        n = random.randint(0,5)
+        if n == 5:
+            ravens = ravens + 1
+        elif n == 4:
+            fruitbasket(fruits)
+            fruitbasket(fruits)
+        elif fruits[n] > 0:
+            fruits[n] = fruits[n] - 1
+
+def basket (fruits):
+    mi, mv = 0,0
+    for i, v in enumerate(fruits):
+        if v > mv:
+            mi,mv = i,v
+    fruits[mi] = mv-1
+
+def monte (game,simulation):
+    wins = 0
+    for i in range(simulation):
+        if game():
+            wins = wins +1
+    return (wins*100) / simulation
+
+def simulate(count):
+    return simulate(lambda:farm(monte),simulation)
+
+print('Winning rates of 100000 games \n%s' %
+      (str(simulate(simulation)) + '%')
+
+
+
+
